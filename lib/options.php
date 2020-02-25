@@ -1,5 +1,4 @@
 <?
-
 namespace Developx\Gcaptcha;
 
 /**
@@ -153,5 +152,3 @@ class Options
         return self::CAPTCHA_ACTION;
     }
 }
-
-?>

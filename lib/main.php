@@ -1,6 +1,6 @@
 <?
 namespace Developx\Gcaptcha;
-use Developx\Gcaptcha\Options;
+
 /**
  * Class Captcha
  */
@@ -58,6 +58,12 @@ class Main
         file_put_contents($logFile, print_r($_REQUEST, 1).PHP_EOL, FILE_APPEND);
         file_put_contents($logFile, print_r($data, 1).PHP_EOL, FILE_APPEND);
     }
-}
 
-?>
+    /**
+     * @return string
+     */
+    public function getLogData()
+    {
+        return file_get_contents($this->getLogPath());
+    }
+}

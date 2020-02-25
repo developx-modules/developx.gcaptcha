@@ -4,7 +4,6 @@ use Bitrix\Main\Localization\Loc;
 
 global $USER;
 if ($USER->IsAdmin()):
-
     $moduleName = 'developx.gcaptcha';
     Loader::includeModule($moduleName);
     $moduleObj = Developx\Gcaptcha\Options::getInstance();
@@ -22,8 +21,6 @@ if ($USER->IsAdmin()):
         die();
     }
 
-    CJSCore::Init('jquery');
-
     $aTabs = array(
         array("DIV" => "edit1", "TAB" => Loc::getMessage('DX_CPT_OPT_T1'), "ICON" => "main_user_edit", "TITLE" => Loc::getMessage('DX_CPT_OPT_T1')),
         array("DIV" => "edit2", "TAB" => Loc::getMessage('DX_CPT_OPT_T2'), "ICON" => "main_user_edit", "TITLE" => Loc::getMessage('DX_CPT_OPT_T2')),
@@ -38,6 +35,7 @@ if ($USER->IsAdmin()):
         <tr class="heading">
             <td colspan="2"><?=Loc::getMessage('DX_CPT_OPT_T1')?></td>
         </tr>
+        <a href="https://www.google.com/recaptcha/admin/create" target="_blank" rel="nofollow">Получить код гулу каптчи</a>
         <? foreach ($arOptions as $code => $props) {
             $moduleObj->showHtmlOption($code, Loc::getMessage('DX_CPT_OPT_' . $code));
         } ?>
@@ -48,7 +46,10 @@ if ($USER->IsAdmin()):
         <tr class="heading">
             <td colspan="2">
                 <textarea style="width: 100%;height: 500px;">
-                    <?echo file_get_contents($moduleObj->getLogPath())?>
+                    <?
+                    $mainObj = new Developx\Gcaptcha\Main();
+                    echo $mainObj->getLogData();
+                    ?>
                 </textarea>
             </td>
         </tr>

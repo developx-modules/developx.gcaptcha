@@ -4,7 +4,6 @@ $(document).ready(function ($) {
     window.DevelopxGcaptcha = function (captchaKey, captchaAction) {
         this.captchaKey = captchaKey;
         this.captchaAction = captchaAction;
-        this.captchaInterval = false;
         this.initCaptcha();
     };
     window.DevelopxGcaptcha.prototype = {
@@ -17,7 +16,7 @@ $(document).ready(function ($) {
             }
             grecaptcha.ready(function () {
                 $this.resetCaptcha();
-                $this.captchaInterval = setInterval(
+                setInterval(
                     function () {
                         $this.resetCaptcha();
                     },

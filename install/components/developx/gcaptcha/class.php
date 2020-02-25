@@ -12,9 +12,9 @@ class DevelopxGcaptchaComponent extends \CBitrixComponent
     private function getAction()
     {
         if (empty($_REQUEST["AJAX_CALL"]) && $_REQUEST["AJAX_CALL"] != 'Y'){
-            return 'ADD';
+            return 'add';
         }else{
-            return 'RESET';
+            return 'update';
         }
     }
 
@@ -25,8 +25,7 @@ class DevelopxGcaptchaComponent extends \CBitrixComponent
             if ($moduleObj->checkCaptchaActive()) {
                 $this->arResult['OPTIONS'] = $moduleObj->getOptions();
                 $this->arResult['CAPTCHA_ACTION'] = $moduleObj->getCaptchaAction();
-                $this->arResult['ACTION'] = $this->getAction();
-                $this->includeComponentTemplate();
+                $this->includeComponentTemplate($this->getAction());
             }
         }
     }
