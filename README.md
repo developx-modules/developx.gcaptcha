@@ -10,15 +10,19 @@ Developx: модуль гугл каптчи 3.0
 3) Заполнить настройки на странице /bitrix/admin/settings.php?lang=ru&mid=developx.gcaptcha
 
 4) На странице формы подключить компонент каптчи 
-<? $APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false); ?>
+<pre>
+$APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false);
+</pre>
 
 5) В тег формы добавить класс .captchaFormJs
 <form class="captchaFormJs"></form>
 
 6) Перед добавлением данных формы добавить код проверку
+<pre>
 if (CModule::IncludeModule('developx.gcaptcha')){
     $captchaObj = new Developx\Gcaptcha\Main();
     if ($captchaObj->checkCaptcha(){
         //проверка пройдена
     }
 }
+</pre>
