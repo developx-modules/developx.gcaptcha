@@ -69,7 +69,7 @@ class developx_gcaptcha extends CModule
 
     public function InstallFiles()
     {
-        CopyDirFiles($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . $this->MODULE_ID . "/install/components", $_SERVER["DOCUMENT_ROOT"] . "/bitrix/gcaptcha", true, true);
+        CopyDirFiles($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . $this->MODULE_ID . "/install/components", $_SERVER["DOCUMENT_ROOT"] . "/bitrix/components/developx", true, true);
         return true;
     }
 
