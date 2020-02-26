@@ -35,7 +35,6 @@ if ($USER->IsAdmin()):
         <tr class="heading">
             <td colspan="2"><?=Loc::getMessage('DX_CPT_OPT_T1')?></td>
         </tr>
-        <a href="https://www.google.com/recaptcha/admin/create" target="_blank" rel="nofollow">Получить код гулу каптчи</a>
         <? foreach ($arOptions as $code => $props) {
             $moduleObj->showHtmlOption($code, Loc::getMessage('DX_CPT_OPT_' . $code));
         } ?>

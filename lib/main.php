@@ -1,4 +1,5 @@
 <?
+
 namespace Developx\Gcaptcha;
 
 /**
@@ -54,9 +55,9 @@ class Main
     private function logCaptchaFail($data)
     {
         $logFile = $this->getLogPath();
-        file_put_contents($logFile, date('d.m.Y h:i:s') . '----------------------'.PHP_EOL, FILE_APPEND);
-        file_put_contents($logFile, print_r($_REQUEST, 1).PHP_EOL, FILE_APPEND);
-        file_put_contents($logFile, print_r($data, 1).PHP_EOL, FILE_APPEND);
+        file_put_contents($logFile, date('d.m.Y h:i:s') . '----------------------' . PHP_EOL, FILE_APPEND);
+        file_put_contents($logFile, print_r($_REQUEST, 1) . PHP_EOL, FILE_APPEND);
+        file_put_contents($logFile, print_r($data, 1) . PHP_EOL, FILE_APPEND);
     }
 
     /**
