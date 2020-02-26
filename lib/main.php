@@ -3,7 +3,7 @@
 namespace Developx\Gcaptcha;
 
 /**
- * Class Captcha
+ * Class Main
  */
 class Main
 {
@@ -42,14 +42,6 @@ class Main
     }
 
     /**
-     * @return string
-     */
-    private function getLogPath()
-    {
-        return $_SERVER['DOCUMENT_ROOT'] . self::LOG_PATH;
-    }
-
-    /**
      * @param array $data
      */
     private function logCaptchaFail($data)
@@ -58,6 +50,13 @@ class Main
         file_put_contents($logFile, date('d.m.Y h:i:s') . '----------------------' . PHP_EOL, FILE_APPEND);
         file_put_contents($logFile, print_r($_REQUEST, 1) . PHP_EOL, FILE_APPEND);
         file_put_contents($logFile, print_r($data, 1) . PHP_EOL, FILE_APPEND);
+    }
+    /**
+     * @return string
+     */
+    private function getLogPath()
+    {
+        return $_SERVER['DOCUMENT_ROOT'] . self::LOG_PATH;
     }
 
     /**
