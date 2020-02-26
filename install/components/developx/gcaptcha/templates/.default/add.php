@@ -5,7 +5,7 @@ global $APPLICATION;
 $APPLICATION->AddHeadString('<script type="text/javascript" src="//www.google.com/recaptcha/api.js?render=' . $arResult['OPTIONS']["CAPTCHA_KEY"] . '"></script>', true);
 $APPLICATION->AddHeadScript($templateFolder . "/gcaptcha.js", true);
 if ($arResult['OPTIONS']['INCLUDE_JQUERY'] == 'Y') {
-    $APPLICATION->AddHeadScript($templateFolder . "/jquery.min.js");
+    CJSCore::Init(["jquery"]);
 } ?>
 <script>
     $(document).ready(function ($) {
