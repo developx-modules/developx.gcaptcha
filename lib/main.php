@@ -1,5 +1,4 @@
 <?
-
 namespace Developx\Gcaptcha;
 
 /**
