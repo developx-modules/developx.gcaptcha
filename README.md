@@ -1,9 +1,10 @@
 # developx.gcaptcha
 
-Developx: модуль гугл каптчи 3.0
+Developx: модуль ГуглКаптчи v3
 
 Установка:
-1) Скачать и установить модуль из https://marketplace.1c-bitrix.ru/
+
+1) Скачать и установить модуль из https://marketplace.1c-bitrix.ru/developx.gcaptcha
 
 2) Получить ключ гугл каптчи https://www.google.com/recaptcha/admin/create
 

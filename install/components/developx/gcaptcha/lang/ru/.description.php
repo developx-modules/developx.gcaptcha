@@ -1,4 +1,4 @@
 <?
-$MESS ['DX_CPT_DESC_DETAIL'] = "Developx: Ãóãë Êàïò÷à 3.0";
-$MESS ['DX_CPT_DESC_DETAIL_DESC'] = "";
+$MESS ['DX_CPT_DESC_DETAIL'] = "Developx: reCAPTCHA v3";
+$MESS ['DX_CPT_DESC_DETAIL_DESC'] = "ÃóãëÊàïò÷à v3";
 $MESS ['DX_CPT_DESC_CATALOG'] = "Developx";
