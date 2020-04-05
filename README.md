@@ -16,14 +16,10 @@
 4) Добавить в блок формы компонент каптчи
 
 Пример: 
-```html
+```
 <form>
-//поля формы
-```
-```php
-    $APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false);
-```
-```html
+    //поля формы
+    <? $APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false); ?>
 </form>
 ```
 
