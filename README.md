@@ -17,10 +17,10 @@
 
 Пример: 
 <pre>
-    <form>
+    < form>
         //поля формы
         <?$APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false);?>
-    </form>
+    < /form>
 </pre>
 
 5) Перед добавлением данных формы добавить код проверки
