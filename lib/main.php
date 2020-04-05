@@ -7,7 +7,8 @@ namespace Developx\Gcaptcha;
 class Main
 {
     const MODULE_NAME = 'developx.gcaptcha';
-    const LOG_PATH = '/bitrix/modules/developx.comments/log/captcha_fails_log.log';
+    const LOG_PATH = '/bitrix/modules/developx.gcaptcha/log/captcha_fails_log.log';
+    const GOOGLE_API_URL = 'https://www.google.com/recaptcha/api/siteverify';
 
     /**
      * @return boolean
@@ -27,11 +28,10 @@ class Main
 
         $token = $_REQUEST['token'];
         if (!empty($token)) {
-            $url_google_api = 'https://www.google.com/recaptcha/api/siteverify';
-            $query = $url_google_api . '?secret=' . $options['CAPTCHA_SECRET'] . '&response=' . $token . '&remoteip=' . $_SERVER['REMOTE_ADDR'];
+            $query = self::GOOGLE_API_URL . '?secret=' . $options['CAPTCHA_SECRET'] . '&response=' . $token . '&remoteip=' . $_SERVER['REMOTE_ADDR'];
             $data = json_decode(file_get_contents($query));
 
-            if ($data->success && $data->score > $options['CAPTCHA_SENS'] && $data->action == $optionsObj->getCaptchaAction()) {
+            if ($data->success && $data->score >= $options['CAPTCHA_SENS'] && $data->action == $optionsObj->getCaptchaAction()) {
                 return true;
             } elseif ($options['CAPTCHA_FAILS_LOG'] == 'Y') {
                 $this->logCaptchaFail($data);

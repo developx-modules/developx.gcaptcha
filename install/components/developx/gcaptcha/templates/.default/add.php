@@ -4,9 +4,8 @@
 global $APPLICATION;
 $APPLICATION->AddHeadString('<script type="text/javascript" src="//www.google.com/recaptcha/api.js?render=' . $arResult['OPTIONS']["CAPTCHA_KEY"] . '"></script>', true);
 $APPLICATION->AddHeadScript($templateFolder . "/gcaptcha.js", true);
-if ($arResult['OPTIONS']['INCLUDE_JQUERY'] == 'Y') {
-    CJSCore::Init(["jquery"]);
-} ?>
+?>
+<input type="hidden" name="token" class="dxCaptchaToken">
 <script>
     $(document).ready(function ($) {
         if (typeof DevelopxGcaptcha_ == "undefined") {

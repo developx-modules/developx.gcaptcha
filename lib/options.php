@@ -1,4 +1,5 @@
 <?
+
 namespace Developx\Gcaptcha;
 
 /**
@@ -26,8 +27,9 @@ class Options
             'SIZE' => 50
         ],
         'CAPTCHA_SENS' => [
-            'TYPE' => 'text',
-            'DEFAULT' => 0.5
+            'TYPE' => 'select',
+            'DEFAULT' => 0.5,
+            'VALUES' => [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
         ],
         'CAPTCHA_FAILS_LOG' => [
             'TYPE' => 'checkbox',
@@ -118,30 +120,37 @@ class Options
     /**
      * @param string $code
      * @param string $title
+     * @return string
      */
     public function showHtmlOption($code, $title)
     {
         $params = $this->arOptions[$code];
         switch ($params['TYPE']) {
             case 'checkbox':
-                echo '
-                <tr>
-                    <td width="50%">' . $title . '</td>
-                    <td width="50%"><input type="checkbox" 
+                $option = '<input type="checkbox" 
                     name="' . $code . '"
-                    value="Y" ' . ($params['VALUE'] == "Y" ? "checked" : "") . '></td>
-                </tr>';
+                    value="Y" ' . ($params['VALUE'] == "Y" ? "checked" : "") . '>';
                 break;
             case 'text':
-                echo '
-                <tr>
-                    <td width="50%">' . $title . '</td>
-                    <td width="50%">
-                    <input type="text" size="' . $params['SIZE'] . '" maxlength="255" value="' . $params['VALUE'] . '" name="' . $code . '">
-                    </td>
-                </tr>';
+                $option = '<input type="text" 
+                    size="' . $params['SIZE'] . '" 
+                    maxlength="255" 
+                    value="' . $params['VALUE'] . '" 
+                    name="' . $code . '"> ';
+                break;
+            case 'select':
+                $option = '<select name="' . $code . '">';
+                foreach ($params['VALUES'] as $value) {
+                    $option .= '<option ' . ($value == $params['VALUE'] ? "selected" : "") . ' value="' . $value . '">' . $value . '</option>';
+                }
+                $option .= '</select>';
                 break;
         }
+        $result = '<tr>
+                    <td width="50%">' . $title . '</td>
+                    <td width="50%">' . $option . '</td>
+                </tr>';
+        return $result;
     }
 
     /**

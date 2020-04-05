@@ -13,7 +13,7 @@ if (class_exists('developx_gcaptcha')) {
 class developx_gcaptcha extends CModule
 {
     /** @var string */
-    public $MODULE_ID;
+    public $MODULE_ID = 'developx.gcaptcha';
 
     /** @var string */
     public $MODULE_VERSION;
@@ -47,7 +47,6 @@ class developx_gcaptcha extends CModule
         }
 
         Loc::loadMessages(__FILE__);
-        $this->MODULE_ID = 'developx.gcaptcha';
         $this->MODULE_NAME = Loc::getMessage('DX_CPT_MODULE_NAME');
         $this->MODULE_DESCRIPTION = Loc::getMessage('DX_CPT_MODULE_DESCRIPTION');
         $this->MODULE_GROUP_RIGHTS = 'N';
@@ -55,19 +54,19 @@ class developx_gcaptcha extends CModule
         $this->PARTNER_URI = 'https://developx.ru';
     }
 
-    public function doInstall()
+    public function DoInstall()
     {
         ModuleManager::registerModule($this->MODULE_ID);
-        $this->InstallFiles();
+        $this->installFiles();
     }
 
-    public function doUninstall()
+    public function DoUninstall()
     {
         ModuleManager::unregisterModule($this->MODULE_ID);
         $this->uninstallFiles();
     }
 
-    public function InstallFiles()
+    public function installFiles()
     {
         CopyDirFiles($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . $this->MODULE_ID . "/install/components", $_SERVER["DOCUMENT_ROOT"] . "/bitrix/components", true, true);
         return true;

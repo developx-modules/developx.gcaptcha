@@ -32,8 +32,7 @@ $(document).ready(function ($) {
                 });
         },
         addFormToken: function (token) {
-            $('.captchaFormJs').find('.gtoken').remove();
-            $('.captchaFormJs').append('<input type="hidden" name="token" value="' + token + '">');
+            $('body').find('.dxCaptchaToken').val(token);
         }
     }
 });

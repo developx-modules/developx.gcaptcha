@@ -18,6 +18,13 @@ class DevelopxGcaptchaComponent extends \CBitrixComponent
         }
     }
 
+    private function checkJQuery()
+    {
+        if ($this->arResult['OPTIONS']['INCLUDE_JQUERY'] == 'Y') {
+            CJSCore::Init(["jquery"]);
+        }
+    }
+
     public function executeComponent()
     {
         if (Loader::includeModule(self::MODULE_NAME)) {
@@ -25,6 +32,7 @@ class DevelopxGcaptchaComponent extends \CBitrixComponent
             if ($moduleObj->checkCaptchaActive()) {
                 $this->arResult['OPTIONS'] = $moduleObj->getOptions();
                 $this->arResult['CAPTCHA_ACTION'] = $moduleObj->getCaptchaAction();
+                $this->checkJQuery();
                 $this->includeComponentTemplate($this->getAction());
             }
         }

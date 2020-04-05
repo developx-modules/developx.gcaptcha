@@ -1,24 +1,31 @@
-# developx.gcaptcha
-
-Developx: модуль ГуглКаптчи v3
+Модуль google каптчи reCAPTCHA v3 для 1С-Битрикс. Защитит вашу форму обратной связи от спама.
+﻿
+Новейшая разработка учитывает движение курсора мыши, а также использует множество других методов идентификации
+реального пользователя, вроде набора текста в браузере. Точность определения – 99,98%.
+Поддерживает настройку чувствительности и логирование неуспешных заявок.
+﻿
+Возможно подключение одновременно к нескольким формам на одной странице.
 
 Установка:
+1) Скачать и установить модуль из MarketPlace Битрикс https://marketplace.1c-bitrix.ru/developx.gcaptcha
 
-1) Скачать и установить модуль из https://marketplace.1c-bitrix.ru/developx.gcaptcha
+2) Получить ключ каптчи на странице https://www.google.com/recaptcha/admin/create
 
-2) Получить ключ гугл каптчи https://www.google.com/recaptcha/admin/create
+3) Заполнить настройки на вашем сайте /bitrix/admin/settings.php?lang=ru&mid=developx.gcaptcha
 
-3) Заполнить настройки на странице /bitrix/admin/settings.php?lang=ru&mid=developx.gcaptcha
+4) Добавить в блок формы компонент каптчи
 
-4) На странице формы подключить компонент каптчи 
+Пример: 
 <pre>
-$APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false);
+    <form>
+        //поля формы
+        <?$APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false);?>
+    </form>
 </pre>
 
-5) В тег формы добавить класс .captchaFormJs
-<form class="captchaFormJs"></form>
+5) Перед добавлением данных формы добавить код проверки
 
-6) Перед добавлением данных формы добавить код проверку
+Пример: 
 <pre>
 if (CModule::IncludeModule('developx.gcaptcha')){
     $captchaObj = new Developx\Gcaptcha\Main();
