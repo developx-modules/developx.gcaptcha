@@ -19,7 +19,7 @@
 <pre>
     < form>
         //поля формы
-        <?$APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false);?>
+        < ?php $APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false);?>
     < /form>
 </pre>
 
