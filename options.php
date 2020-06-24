@@ -35,7 +35,8 @@ if ($USER->IsAdmin()):
         <tr class="heading">
             <td colspan="2"><?=Loc::getMessage('DX_CPT_OPT_T1')?></td>
         </tr>
-        <? foreach ($arOptions as $code => $props) {
+        <?
+        foreach ($arOptions as $code => $props) {
             echo $moduleObj->showHtmlOption($code, Loc::getMessage('DX_CPT_OPT_' . $code));
         } ?>
         <? $tabControl->BeginNextTab(); ?>

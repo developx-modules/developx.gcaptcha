@@ -7,3 +7,5 @@ $MESS ["DX_CPT_OPT_CAPTCHA_SECRET"] = "Секретный ключ";
 $MESS ["DX_CPT_OPT_CAPTCHA_SENS"] = "Чувствительность каптчи";
 $MESS ["DX_CPT_OPT_CAPTCHA_FAILS_LOG"] = "Логировать ошибки каптчи";
 $MESS ["DX_CPT_OPT_INCLUDE_JQUERY"] = "Подключить jQuery";
+$MESS ["DX_CPT_OPT_CAPTCHA_SUCCESS_COUNT"] = "Количество успешных проверок";
+$MESS ["DX_CPT_OPT_CAPTCHA_FAIL_COUNT"] = "Количество спам - заявок";

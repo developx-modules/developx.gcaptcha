@@ -38,6 +38,14 @@ class Options
         'INCLUDE_JQUERY' => [
             'TYPE' => 'checkbox',
             'DEFAULT' => 'Y'
+        ],
+        'CAPTCHA_SUCCESS_COUNT' => [
+            'TYPE' => 'info',
+            'DEFAULT' => 0
+        ],
+        'CAPTCHA_FAIL_COUNT' => [
+            'TYPE' => 'info',
+            'DEFAULT' => 0
         ]
     ];
 
@@ -57,7 +65,7 @@ class Options
         } elseif ($obCache->StartDataCache()) {
             foreach ($this->arOptions as $code => $prop) {
                 $this->arOptions[$code]['VALUE'] = \COption::GetOptionString(self::MODULE_NAME, $code);
-                if (empty($this->arOptions[$code]['VALUE']) && !empty($prop['DEFAULT'])) {
+                if (empty($this->arOptions[$code]['VALUE']) && isset($prop['DEFAULT'])) {
                     $this->arOptions[$code]['VALUE'] = $prop['DEFAULT'];
                 }
             }
@@ -144,6 +152,9 @@ class Options
                     $option .= '<option ' . ($value == $params['VALUE'] ? "selected" : "") . ' value="' . $value . '">' . $value . '</option>';
                 }
                 $option .= '</select>';
+                break;
+            case 'info':
+                $option = '<span>' . $params['VALUE'] . '</span>';
                 break;
         }
         $result = '<tr>
