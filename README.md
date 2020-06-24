@@ -13,14 +13,11 @@
 
 3) Заполнить настройки на вашем сайте /bitrix/admin/settings.php?lang=ru&mid=developx.gcaptcha
 
-4) Добавить в блок формы компонент каптчи
+4) Добавить на сайт компонент каптчи
 
 Пример: 
 ```
-<form>
-    //поля формы
-    <? $APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false); ?>
-</form>
+<? $APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false); ?>
 ```
 
 5) Перед добавлением данных формы добавить код проверки
@@ -31,6 +28,28 @@ if (CModule::IncludeModule('developx.gcaptcha')){
     $captchaObj = new Developx\Gcaptcha\Main();
     if ($captchaObj->checkCaptcha(){
         //проверка пройдена
+    }
+}
+```
+
+
+6) Для форм регистрации, восстановления пароля нужно добавить обработчик в файл init.php
+
+Пример: 
+```php
+AddEventHandler("main", "OnBeforeUserRegister", "checkCaptchaV3"); //для формы регистрации
+AddEventHandler("main", "OnBeforeUserSendPassword", "checkCaptchaV3"); //для восставновления пароля
+
+function checkCaptchaV3()
+{
+    if (CModule::IncludeModule('developx.gcaptcha')){
+        $captchaObj = new Developx\Gcaptcha\Main();
+        if ($captchaObj->checkCaptcha()){
+
+        } else {
+            $GLOBALS['APPLICATION']->ThrowException('Ошибка проверка каптчи');
+            return false;
+        }
     }
 }
 ```
@@ -52,3 +71,14 @@ Score может быть в пределах от 0.0 до 1.0, где:
 Score рекомендуется устанавливать = 0.5
 
 Страница модуля: https://developx.ru/bitrix-modules/gcaptcha/
+
+Изменения в версии 2.0
+
+1) Упрощена установка модуля. Теперь не нужно добавлять ее в каждую форму. А достаточно добавить ее один раз шапку или подвал сайта
+2) Добавлена поддержка композита
+3) Переделан запрос к серверу google на curl
+4) Отключена проверка для авторизированных пользователей
+5) Отключена повторная проверка. Если проверка была пройдена успешно, то в рамках сессии каптча будет отключена
+6) Поддержка обычных (не ajax) форм
+7) Добавлен счетчик успешных / не успешных проверок
+8) В логи добавлена информация о ip, с которых поступают запросы
