@@ -6,57 +6,49 @@
 ﻿
 Возможно подключение одновременно к нескольким формам на одной странице.
 
-Установка:
+<h2>Установка:</h2>
 1) Скачать и установить модуль из MarketPlace Битрикс https://marketplace.1c-bitrix.ru/developx.gcaptcha
 
 2) Получить ключ каптчи на странице https://www.google.com/recaptcha/admin/create
 
 3) Заполнить настройки на вашем сайте /bitrix/admin/settings.php?lang=ru&mid=developx.gcaptcha
 
-4) Добавить компонент каптчи в шапку или подвал сайта.
+4) Добавить в блок формы компонент каптчи
 
 Пример: 
-<pre>
-    < ?$APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false);?>
-</pre>
+```
+<form>
+    //поля формы
+    <? $APPLICATION->IncludeComponent("developx:gcaptcha", ".default", array(), false); ?>
+</form>
+```
 
 5) Перед добавлением данных формы добавить код проверки
 
 Пример: 
-<pre>
+```php
 if (CModule::IncludeModule('developx.gcaptcha')){
     $captchaObj = new Developx\Gcaptcha\Main();
     if ($captchaObj->checkCaptcha(){
         //проверка пройдена
     }
 }
-</pre>
+```
 
-6) Для форм регистрации, восстановления пароля нужно добавить обработчик в файл init.php
+<h2>Логирование</h2>
 
-AddEventHandler("main", "OnBeforeUserRegister", "checkCaptchaV3");
-AddEventHandler("main", "OnBeforeUserSendPassword", "checkCaptchaV3");
+В случае, если проверка не будет пройдена (сервер гугл вернет score меньше, чем заданная чувствительность), в лог добавится запись о не пройденной проверке (при отмеченной опции "Логировать ошибки каптчи").
+В этой записи будет время ошибки, а также 2 массива:
+- 1й - это $_REQUEST, для понимания того, какую информацию пытались отправить
+- 2й - ответ сервера гугл, в котором есть score
 
-function checkCaptchaV3()
-{
-    if (CModule::IncludeModule('developx.gcaptcha')){
-        $captchaObj = new Developx\Gcaptcha\Main();
-        if ($captchaObj->checkCaptcha()){
 
-        } else {
-            $GLOBALS['APPLICATION']->ThrowException('Ошибка проверка каптчи');
-            return false;
-        }
-    }
-}
+<h2>Score (чувствительность каптчи)</h2>
 
-Изменения в версии 2.0
+Score может быть в пределах от 0.0 до 1.0, где:
+- 0.0 означает, что это вероятнее всего робот
+- 1.0 будет означать, что это скорее всего человек
 
-1) Упрощена установка модуля. Теперь не нужно добавлять ее в каждую форму. А достаточно добавить ее один раз шапку или подвал сайта
-2) Добавлена поддержка композита
-3) Переделан запрос к серверу google на curl
-4) Отключена проверка для авторизированных пользователей
-5) Отключена повторная проверка. Если проверка была пройдена успешно, то в рамках сессии каптча будет отключена
-6) Поддержка обычных (не ajax) форм
-7) Добавлен счетчик успешных / не успешных проверок
-8) В логи добавлена информация о ip, с которых поступают запросы
+Score рекомендуется устанавливать = 0.5
+
+Страница модуля: https://developx.ru/bitrix-modules/gcaptcha/
